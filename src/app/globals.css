@@ -1,17 +1,18 @@
 @import "tailwindcss";
 
+/* ========= BRAND THEME: Deep Teal & Vibrant Pink ========= */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #ffffff;      /* Pure white for bright feel */
+  --foreground: #171717;      /* Very dark gray for readability */
+  
+  --accent: #EC4899;           /* Vibrant Pink (Primary CTA) */
+  --accent-hover: #db2777;     /* Darker pink on hover */
+  --accent-secondary: #0F766E; /* Deep Teal (Secondary Accent) */
+
+  --font-sans: var(--font-dm-sans);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
+/* Light / Dark preference */
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
@@ -19,8 +20,49 @@
   }
 }
 
+/* ====== BASE STYLES ====== */
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+a {
+  color: var(--accent-secondary); /* Changed from --accent to Deep Teal */
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--accent-hover);
+}
+
+.btn-primary {
+  background-color: var(--accent);
+  color: #fff;
+  padding: 0.6rem 1.2rem;
+  border-radius: 9999px;
+  font-weight: 500;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.btn-primary:hover {
+  background-color: var(--accent-hover);
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  border: 2px solid var(--accent-secondary); /* Changed to Deep Teal */
+  color: var(--accent-secondary);            /* Changed to Deep Teal */
+  padding: 0.6rem 1.2rem;
+  border-radius: 9999px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+  background-color: var(--accent-secondary); /* Changed to Deep Teal */
+  color: #fff;
+  transform: translateY(-1px);
 }
