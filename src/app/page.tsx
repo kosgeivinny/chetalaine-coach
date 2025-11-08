@@ -1,19 +1,25 @@
-import Hero from "@/components/Hero";
-import About from "@/components/About";
-import Courses from "@/components/Courses";
-import Testimonials from "@/components/Testimonials";
-import Blog from "@/components/BlogSection";
-import Footer from "@/components/Footer";
+// app/page.tsx
+import AOSInitializer from '@/components/AOSInitializer';
+import type { NextPage } from 'next';
+import HeroSection from '@/components/HeroSection';
+import AboutSection from '@/components/AboutSection';
+import ServicesSection from '@/components/ServicesSection';
+import TestimonialsSection from '@/components/TestimonialSection';
+import BlogSection from '@/components/BlogSection';
+import CallToActionSection from '@/components/CallToActionSection';
 
-export default function Home() {
+const HomePage: NextPage = () => {
   return (
-    <main>
-      <Hero />
-      <About />
-      <Courses />
-      <Testimonials />
-      <Blog />
-      <Footer />
-    </main>
+    <div>
+      <AOSInitializer />
+      <HeroSection />
+      <AboutSection />
+      <ServicesSection />
+      <TestimonialsSection />
+      <BlogSection />
+      <CallToActionSection />
+    </div>
   );
-}
+};
+
+export default HomePage;

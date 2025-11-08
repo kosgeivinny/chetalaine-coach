@@ -1,150 +1,135 @@
-"use client";
+// components/BlogSection.tsx
+import React from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
 
-import { motion } from "framer-motion";
-import Link from "next/link";
-import Image from "next/image";
+const BlogSection = () => {
+  // --- THEME DEFINITIONS (Static Hex Codes) ---
+  const TEXT_LIGHT = '#5A5A5A';     // Muted Gray
+  const ACCENT_PINK = '#E3A5A5';    // Warm feminine pink (Link color)
+  const PRIMARY_DARK = '#1C3A35';    // Deep Green (Main Heading & CTA BG)
+  
+  // Tailwind classes using static hex codes:
+  const textLightClass = `text-[${TEXT_LIGHT}]`;
+  const primaryDarkTextClass = `text-[${PRIMARY_DARK}]`; 
+  const accentTextClass = `text-[${ACCENT_PINK}]`;
 
-const blogs = [
-  {
-    title: "Finding Clarity in Your Business Vision",
-    excerpt:
-      "Learn how to cut through the noise, reconnect with your purpose, and set a direction that fuels long-term success. Discover practical exercises and frameworks.",
-    date: "October 10, 2025",
-    image: "/images/business.jpeg",
-    category: "Business Strategy",
-    readTime: "5 min read",
-    slug: "#",
-  },
-  {
-    title: "Mindset Shifts Every Entrepreneur Needs",
-    excerpt:
-      "Discover the powerful mindset habits that help entrepreneurs stay grounded, strategic, and confident under pressure. Transform challenges into opportunities.",
-    date: "September 22, 2025",
-    image: "/images/leadership.png",
-    category: "Leadership",
-    readTime: "7 min read",
-    slug: "#",
-  },
-  {
-    title: "Building Systems That Support Growth",
-    excerpt:
-      "Stop relying on chaos — learn how to design business systems that save time and sustain your momentum. Practical tips for sustainable scaling.",
-    date: "August 30, 2025",
-    image: "/images/productivity.jpeg",
-    category: "Productivity",
-    readTime: "6 min read",
-    slug: "#",
-  },
-];
+  const headingFont = 'font-serif';
+  const bodyFont = 'font-sans'; 
 
-export default function BlogSection() {
+  const blogPosts = [
+    {
+      image: "/images/business.jpeg", // Placeholder
+      tag: "Identity",
+      title: "The Subtle Shift from Strategy to Soul-Led Success",
+      summary: "Discover the three non-negotiable questions you must ask yourself to align your business with your true identity and purpose.",
+      link: "/blog",
+    },
+    {
+      image: "/images/leadership.png", // Placeholder
+      tag: "Strategy",
+      title: "Why Your Strategy Isn't Working (And How to Fix It)",
+      summary: "We break down the common mistakes entrepreneurs make when scaling and provide a simple, 4-step framework for profitable execution.",
+      link: "/blog",
+    },
+    {
+      image: "/images/productivity.jpeg", // Placeholder
+      tag: "Productivity",
+      title: "Beyond Burnout: How to Build Sustainable High Performance",
+      summary: "Learn Monica's favorite high-efficiency systems and mindset hacks to boost output without sacrificing well-being and fulfillment.",
+      link: "/blog",
+    },
+  ];
+
   return (
-    <section id="blog" className="relative py-24 bg-white">
-      <div className="absolute inset-0 bg-[url('/images/dots.svg')] opacity-5"></div>
-      <div className="max-w-7xl mx-auto px-6">
-        {/* ===== Heading ===== */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+    // Background Color: Creamy White (Alternates from Soft Pink Testimonials)
+    <section className={`py-20 md:py-32 bg-[#FFFDFB] overflow-hidden`}> 
+      <div className="container mx-auto max-w-7xl px-4">
+        
+        {/* Section Heading & Subtitle (FADE UP) */}
+        <div 
           className="text-center mb-16"
+          data-aos="fade-up"
         >
-          <div className="inline-block mb-4 px-3 py-1 rounded-full bg-[#0F766E]/10 text-[#0F766E] text-sm font-semibold">
-            Latest Insights
-          </div>
-
-          <h2 className="text-3xl md:text-4xl font-(--font-playfair) text-gray-800 mb-6">
-            Strategies for <span className="text-[#EC4899]">Growth</span>
+          <h2 className={`text-sm font-semibold uppercase tracking-widest ${accentTextClass} ${bodyFont} mb-2`}>
+            Insights & Thought Leadership
           </h2>
-
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Fresh perspectives and actionable strategies from Monica&apos;s experience helping entrepreneurs
-            grow with clarity and confidence.
+          <h2 className={`text-4xl md:text-5xl font-extrabold ${primaryDarkTextClass} ${headingFont} mb-4`}>
+            Latest from the Aligned Empire Blog
+          </h2>
+          <p className={`text-xl ${textLightClass} ${bodyFont} max-w-3xl mx-auto`}>
+            Get the latest wisdom on purpose-driven strategy, mindset, and authentic scaling straight to your inbox.
           </p>
-        </motion.div>
-
-        {/* ===== Blog Cards ===== */}
-        <div className="grid gap-8 md:grid-cols-3">
-          {blogs.map((blog, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.2 }}
-              className="group relative bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100"
-            >
-              {/* Image Container */}
-              <div className="relative w-full h-56 overflow-hidden">
-                <div className="absolute inset-0 bg-linear-to-t from-gray-900/40 to-transparent z-10" />
-                <Image
-                  src={blog.image}
-                  alt={blog.title}
-                  width={400}
-                  height={300}
-                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                />
-                <div className="absolute top-4 left-4 z-20">
-                  <span className="inline-block px-3 py-1 rounded-full bg-white/90 backdrop-blur-sm text-xs font-medium text-gray-800">
-                    {blog.category}
-                  </span>
-                </div>
-              </div>
-
-              {/* Content */}
-              <div className="p-6">
-                <div className="flex items-center gap-3 text-sm text-gray-500 mb-3">
-                  <time dateTime={blog.date}>{blog.date}</time>
-                  <span>•</span>
-                  <span>{blog.readTime}</span>
-                </div>
-
-                <h3 className="text-xl font-semibold text-gray-800 mb-3 line-clamp-2 group-hover:text-[#0F766E] transition-colors">
-                  {blog.title}
-                </h3>
-
-                <p className="text-gray-600 mb-4 line-clamp-3">
-                  {blog.excerpt}
-                </p>
-
-                <Link
-                  href={blog.slug}
-                  className="inline-flex items-center text-[#0F766E] font-semibold hover:text-[#EC4899] transition-colors"
-                >
-                  Read Article
-                  <svg className="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1" viewBox="0 0 16 16" fill="none">
-                    <path d="M1 8h14M9 2l6 6-6 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
-                </Link>
-              </div>
-            </motion.div>
-          ))}
         </div>
 
-        {/* ===== CTA ===== */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="mt-12 text-center"
+        {/* Blog Post Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+          {blogPosts.map((post, index) => (
+            // Card Structure: Apply staggered animation
+            <div 
+              key={index} 
+              data-aos="fade-up" // All cards fade up
+              data-aos-delay={index * 150} // Staggered delay: 0ms, 150ms, 300ms
+              className="bg-white rounded-xl shadow-lg overflow-hidden transition duration-300 transform hover:shadow-2xl hover:-translate-y-1 group"
+            >
+              {/* Image Placeholder */}
+              <div className="relative w-full h-52">
+                <Image 
+                  src={post.image} 
+                  alt={post.title} 
+                  fill 
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                  style={{ objectFit: "cover" }}
+                  className="transition duration-500 group-hover:scale-[1.05]"
+                />
+              </div>
+
+              <div className="p-6">
+                {/* Tag */}
+                <span className={`text-xs font-semibold uppercase tracking-widest text-white bg-[#1C3A35] px-3 py-1 rounded-full shadow-md mb-3 inline-block`}>
+                  {post.tag}
+                </span>
+
+                {/* Title */}
+                <h3 className={`text-xl font-bold ${primaryDarkTextClass} ${headingFont} mb-3 group-hover:${accentTextClass} transition-colors`}>
+                  {post.title}
+                </h3>
+                
+                {/* Summary */}
+                <p className={`text-base ${textLightClass} ${bodyFont} mb-4`}>
+                  {post.summary}
+                </p>
+                
+                {/* Read More Link */}
+                <Link 
+                  href={post.link} 
+                  className={`text-base font-semibold ${accentTextClass} ${bodyFont} hover:underline transition-colors flex items-center`}
+                >
+                  Read Full Post
+                  <svg className="w-4 h-4 ml-2 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                </Link>
+              </div>
+            </div>
+          ))}
+        </div>
+        
+        {/* --- Main CTA below Blogs (FADE UP) --- */}
+        <div 
+          className="text-center mt-20"
+          data-aos="fade-up"
+          data-aos-delay="450" // Ensures the CTA appears after the last card
         >
-          <Link
-            href="/blog"
-            className="group relative inline-flex items-center px-8 py-4 rounded-full border-2 border-[#0F766E] bg-transparent text-[#0F766E] font-semibold overflow-hidden transition-all duration-300 hover:shadow-xl hover:shadow-[#0F766E]/20"
-          >
-            <span className="relative z-10 flex items-center text-lg">
-              View All Articles
-              <svg className="w-5 h-5 ml-2 transition-transform duration-500 ease-out group-hover:translate-x-1" viewBox="0 0 16 16" fill="none">
-                <path d="M1 8h14M9 2l6 6-6 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </span>
-            <div className="absolute inset-0 bg-[#0F766E] opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
-            <div className="absolute inset-0 bg-white opacity-0 mix-blend-soft-light transition-opacity duration-300 group-hover:opacity-10"></div>
-          </Link>
-        </motion.div>
+             <Link 
+                href="/blog" 
+                // CTA Button: Deep Green BG and Pink Hover
+                className={`inline-block rounded-full px-10 py-3 text-lg font-bold text-white transition-all shadow-xl hover:shadow-2xl hover:scale-[1.03] bg-[#1C3A35] hover:bg-[#E3A5A5]`}
+              >
+                Visit the Full Blog Archive
+            </Link>
+        </div>
       </div>
     </section>
   );
-}
+};
+
+export default BlogSection;
